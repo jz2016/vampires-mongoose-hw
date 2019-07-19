@@ -162,58 +162,113 @@ const vampireData = require("./populateVampires.js");
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
 // Have a title poperty
-Vampire.find(
-	{title: {$exists: true}},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{title: {$exists: true}},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Do NOT have a victims property
-Vampire.find(
-	{victims: {$exists: false}},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{victims: {$exists: false}},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Have a title AND no victims
-Vampire.find(
-	{title: {$exists: true},
-	victims: {$exists: false},
-},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{title: {$exists: true},
+// 	victims: {$exists: false},
+// },
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Have victims AND the victims they have are greater than 1000
-Vampire.find(
-	{
-	victims: {$exists: false},
-	victims: {$gt: 1000},
-	},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{
+// 	victims: {$exists: false},
+// 	victims: {$gt: 1000},
+// 	},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 
 /////////////////////////////////////////////////
 // ### Select with OR
-
+// Are from New York, New York, US OR New Orleans, Louisiana, US
+Vampire.find(
+	{ $or: [
+		{location: "New York, New York, US"},
+		{location: "New Orleans, Louisiana, US"}
+	]},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Love brooding or being tragic
+Vampire.find(
+	{ $or: [
+		{loves: "brooding"},
+		{loves: "being tragic"}
+	]},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Have more than 1000 victims or love marshmallows
+Vampire.find(
+	{ $or: [
+		{victims: {$gt: 1000}},
+		{loves: "marshmallows"}
+	]},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Have red hair or green eyes
+Vampire.find(
+	{ $or: [
+		{hair_color: "red"},
+		{eye_color: "green"}
+	]},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
 /////////////////////////////////////////////////
 //### Select objects that match one of several values
 
