@@ -96,71 +96,120 @@ const vampireData = require("./populateVampires.js");
 /////////////////////////////////////////////////
 // ### Select by comparison
 // Find ALL female vampires
-Vampire.find(
-	{gender: "f"},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{gender: "f"},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Find ALL vampires that have greater than 500 victims
-Vampire.find(
-	{victims: {
-		$gt: 500,
-	}},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{victims: {
+// 		$gt: 500,
+// 	}},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Find ALL vampires that have fewer than or equal to 150 victims
-Vampire.find(
-	{victims: {
-		$lte: 150,
-	}},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{victims: {
+// 		$lte: 150,
+// 	}},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Find ALL vampires that have victim count not equal to 210234
-Vampire.find(
-	{victims: {
-		$ne: 210234,
-	}},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{victims: {
+// 		$ne: 210234,
+// 	}},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Find ALL that have greater than 150 AND less than 500 victims
-Vampire.find(
-	{victims: {
-		$lt: 500,
-		$gt: 150,
-	}},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{victims: {
+// 		$lt: 500,
+// 		$gt: 150,
+// 	}},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
+// Have a title poperty
+Vampire.find(
+	{title: {$exists: true}},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Do NOT have a victims property
+Vampire.find(
+	{victims: {$exists: false}},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Have a title AND no victims
+Vampire.find(
+	{title: {$exists: true},
+	victims: {$exists: false},
+},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Have victims AND the victims they have are greater than 1000
+Vampire.find(
+	{
+	victims: {$exists: false},
+	victims: {$gt: 1000},
+	},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
 
 /////////////////////////////////////////////////
 // ### Select with OR
