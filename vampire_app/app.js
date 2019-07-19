@@ -214,64 +214,120 @@ const vampireData = require("./populateVampires.js");
 /////////////////////////////////////////////////
 // ### Select with OR
 // Are from New York, New York, US OR New Orleans, Louisiana, US
-Vampire.find(
-	{ $or: [
-		{location: "New York, New York, US"},
-		{location: "New Orleans, Louisiana, US"}
-	]},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{ $or: [
+// 		{location: "New York, New York, US"},
+// 		{location: "New Orleans, Louisiana, US"}
+// 	]},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Love brooding or being tragic
-Vampire.find(
-	{ $or: [
-		{loves: "brooding"},
-		{loves: "being tragic"}
-	]},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{ $or: [
+// 		{loves: "brooding"},
+// 		{loves: "being tragic"}
+// 	]},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Have more than 1000 victims or love marshmallows
-Vampire.find(
-	{ $or: [
-		{victims: {$gt: 1000}},
-		{loves: "marshmallows"}
-	]},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{ $or: [
+// 		{victims: {$gt: 1000}},
+// 		{loves: "marshmallows"}
+// 	]},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 // Have red hair or green eyes
-Vampire.find(
-	{ $or: [
-		{hair_color: "red"},
-		{eye_color: "green"}
-	]},
-	(err,vampireFound) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(vampireFound);
-		}
-	}
-);
+// Vampire.find(
+// 	{ $or: [
+// 		{hair_color: "red"},
+// 		{eye_color: "green"}
+// 	]},
+// 	(err,vampireFound) => {
+// 		if(err){
+// 			console.log(err);
+// 		} else {
+// 			console.log(vampireFound);
+// 		}
+// 	}
+// );
 /////////////////////////////////////////////////
 //### Select objects that match one of several values
-
+// Love either frilly shirtsleeves or frilly collars
+Vampire.find(
+	{ $or: [
+		{loves: "frilly shirtsleeves"},
+		{loves: "frilly collars"}
+	]},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Love brooding
+Vampire.find(
+		{loves: "brooding"},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Love at least one of the following: appearing innocent, 
+// trickery, lurking in rotting mansions, R&B music
+Vampire.find(
+	{ $or: [
+		{loves: "appearing innocent"},
+		{loves: "trickery"},
+		{loves: "lurking in rotting mansions"},
+		{loves: "R&B music"}
+	]},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
+// Love fancy cloaks but not if they also love either top 
+// hats or virgin blood 
+Vampire.find(
+		{$and: [ 
+			{loves: "fancy cloaks"},
+			{loves: { $nin: ["top hats", "virgin blood"]}},
+		]},
+	(err,vampireFound) => {
+		if(err){
+			console.log(err);
+		} else {
+			console.log(vampireFound);
+		}
+	}
+);
 /////////////////////////////////////////////////
 //### Negative Selection
 
